@@ -38,7 +38,10 @@ public class SecurityConfig {
                 .userDetailsService(userDetailsService())
                 .formLogin(config -> config.defaultSuccessUrl("/memory/user"))
                 .oauth2Login(config -> config.defaultSuccessUrl("/oauth/user"))
-                .authorizeHttpRequests(c-> c.anyRequest().authenticated())
+                .authorizeHttpRequests(c-> c
+                        .requestMatchers("/home").permitAll()
+                        .anyRequest().authenticated()
+                )
                 .build();
     }
 
