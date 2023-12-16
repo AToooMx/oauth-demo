@@ -6,6 +6,7 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.Map;
 
 @RestController
@@ -13,7 +14,14 @@ public class DemoController {
 
     private final Logger logger = LoggerFactory.getLogger(DemoController.class);
 
-    @GetMapping("/user")
+    @GetMapping("/memory/user")
+    public String getUserInfo(Principal principal){
+        String username = principal.getName();
+        logger.info("Username = {}", username);
+        return username;
+    }
+
+    @GetMapping("/oauth/user")
     public Map<String, Object> getUserInfo(OAuth2AuthenticationToken token){
         logger.info("User details = {}", token.getPrincipal().getAttributes());
         return token.getPrincipal().getAttributes();
