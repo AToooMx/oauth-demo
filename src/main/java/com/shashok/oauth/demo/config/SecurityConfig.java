@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .formLogin(config -> config.defaultSuccessUrl("/memory/user"))
                 .oauth2Login(config -> config.defaultSuccessUrl("/oauth/user"))
                 .authorizeHttpRequests(c-> c
-                        .requestMatchers("/home").permitAll()
+                        .requestMatchers("/unsecured/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .build();
